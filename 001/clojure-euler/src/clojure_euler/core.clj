@@ -1,6 +1,10 @@
-(ns clojure-euler.core)
+(ns clojure-euler.core
+  (:gen-class))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (println (reduce +
+                   (distinct
+                    (concat (range 3 1000 3)
+                            (range 5 1000 5))))))
