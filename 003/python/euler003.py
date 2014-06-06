@@ -26,4 +26,4 @@ def primeFactors(n):
     return pf
 
 l = primeFactors(600851475143)
-print  l
+print  l[len(l) -1]
