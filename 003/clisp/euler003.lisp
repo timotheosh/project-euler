@@ -1,13 +1,16 @@
 ; Project Euler Problem 3
+; Solution found here : https://groups.google.com/forum/#!msg/comp.lang.lisp/R1cfrqKzecI/LlS8DAxdJJEJ
+; Study and undertsand!
 
-(defun primeFactors (n)
-  (setf pf nil)
-  ; Step 1. Add the number of 2s that divide n
-  (while (zerop (mod n 2))
-    (cons n pf)
-    (setf n (/ n 2)))
+(defun prime-factors (n)
+  (labels ((next (x) (case x (2 3)
+                             (t (+ 2 x))))
+           (primes (n candidate)
+             (cond
+               ((> candidate n) nil)
+               ((zerop (mod n candidate))
+                 (cons candidate (primes (/ n candidate) candidate)))
+               (t (primes n (next candidate))))))
+    (primes n 2)))
 
-  ; Step 2. n must be odd at this point.  So we can skip one element
-  ;   (Note i = i +2)
-  (loop for i from 3
-  
+(format t "~A" (car (last (prime-factors 600851475143))))
